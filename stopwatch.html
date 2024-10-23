@@ -12,14 +12,35 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Styling for the timer paragraph -->
     <style>
         .timer-background {
-            background-color: lightgray;
+            background-color: lightgrey;
             padding: 15px;
             border-radius: 5px;
             font-size: 2em;
             text-align: center;
+            width: 150px;
+            height: 50px;
+        }
+
+        .timer-running {
+            background-color: lightgreen;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 2em;
+            text-align: center;
+            width: 150px;
+            height: 50px;
+        }
+
+        .timer-paused {
+            background-color: rgb(251, 18, 47);
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 2em;
+            text-align: center;
+            width: 150px;
+            height: 50px;
         }
     </style>
 
@@ -40,10 +61,14 @@
             $buttonStart.click(function () {
                 clearInterval(interval);
                 interval = setInterval(startTimer, 10);
+                $("#timer").removeClass("timer-background timer-paused").addClass("timer-running");
             });
 
             $buttonStop.click(function () {
                 clearInterval(interval);
+                if (seconds !== "00" || tens !== "00") {
+                    $("#timer").removeClass("timer-running timer-background").addClass("timer-paused");
+                }
             });
 
             $buttonReset.click(function () {
@@ -52,6 +77,7 @@
                 seconds = "00";
                 $appendTens.html(tens);
                 $appendSeconds.html(seconds);
+                $("#timer").removeClass("timer-running timer-paused").addClass("timer-background");
             });
 
             function startTimer() {
