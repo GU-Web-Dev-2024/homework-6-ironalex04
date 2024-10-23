@@ -56,6 +56,23 @@
             var $buttonReset = $('#button-reset');
             var interval;
 
+
+            $buttonStart.addClass("button-style");
+            $buttonStop.addClass("button-style");
+            $buttonReset.addClass("button-style");
+
+
+            $(".button-style").css({
+                "padding": "10px 30px",
+                "font-size": "16px",
+                "border": "none",
+                "border-radius": "5px",
+                "background-color": "#000000",
+                "color": "white",
+                "cursor": "pointer",
+                "margin": "5px"
+            });
+
             $("#timer").addClass("timer-background");
 
             $buttonStart.click(function () {
