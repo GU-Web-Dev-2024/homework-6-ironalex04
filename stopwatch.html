@@ -55,12 +55,11 @@
             var $buttonStop = $('#button-stop');
             var $buttonReset = $('#button-reset');
             var interval;
-
+            var opacityInterval;
 
             $buttonStart.addClass("button-style");
             $buttonStop.addClass("button-style");
             $buttonReset.addClass("button-style");
-
 
             $(".button-style").css({
                 "padding": "10px 30px",
@@ -77,12 +76,16 @@
 
             $buttonStart.click(function () {
                 clearInterval(interval);
+                clearInterval(opacityInterval);
                 interval = setInterval(startTimer, 10);
+                animateOpacity();
                 $("#timer").removeClass("timer-background timer-paused").addClass("timer-running");
             });
 
             $buttonStop.click(function () {
                 clearInterval(interval);
+                clearInterval(opacityInterval);
+                $("#timer").css("opacity", "1.0");
                 if (seconds !== "00" || tens !== "00") {
                     $("#timer").removeClass("timer-running timer-background").addClass("timer-paused");
                 }
@@ -90,12 +93,33 @@
 
             $buttonReset.click(function () {
                 clearInterval(interval);
+                clearInterval(opacityInterval);
                 tens = "00";
                 seconds = "00";
                 $appendTens.html(tens);
                 $appendSeconds.html(seconds);
                 $("#timer").removeClass("timer-running timer-paused").addClass("timer-background");
+                $("#timer").css("opacity", "1.0");
             });
+
+            function animateOpacity() {
+                var isFadingOut = true; // Track fading direction
+                opacityInterval = setInterval(function () {
+                    var currentOpacity = parseFloat($("#timer").css("opacity"));
+                    if (isFadingOut) {
+                        currentOpacity -= 0.01;
+                        if (currentOpacity <= 0.8) {
+                            isFadingOut = false;
+                        }
+                    } else {
+                        currentOpacity += 0.01;
+                        if (currentOpacity >= 1.0) {
+                            isFadingOut = true;
+                        }
+                    }
+                    $("#timer").css("opacity", currentOpacity);
+                }, 50);
+            }
 
             function startTimer() {
                 tens++;
