@@ -1,0 +1,80 @@
+/*
+    HW6 Starter code
+     Modified from: https://codepen.io/cathydutton/pen/GBcvo
+     Name: Alex Sautereau
+     Last modified: Oct 23rd: 7:45pm
+     COURSE: WEB DEVELOPMENT 
+
+*/
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ffcc99;
+    margin: 0;
+}
+
+.wrapper {
+    text-align: center;
+    background-color: #fff3e6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.timer-background {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 2em;
+    text-align: center;
+    width: 150px;
+    margin: 0 auto;
+    height: 50px;
+}
+
+.timer-running {
+    background-color: rgba(200, 255, 200, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 2em;
+    text-align: center;
+    width: 150px;
+    margin: 0 auto;
+    height: 50px;
+}
+
+.timer-paused {
+    background-color: rgba(255, 100, 100, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 2em;
+    text-align: center;
+    width: 150px;
+    margin: 0 auto;
+    height: 50px;
+}
+
+.styled-border {
+    border: 2px solid #4a4a4a;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.styled-text {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: #333;
+}
+
+.button-style {
+    padding: 10px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000000;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
+}
