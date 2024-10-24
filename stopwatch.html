@@ -1,6 +1,8 @@
 <!-- 
     HW6 Starter code
      Modified from: https://codepen.io/cathydutton/pen/GBcvo
+     Name: Alex Sautereau
+     Last modified: Oct 23rd: 7:30pm
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -13,34 +15,76 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffcc99;
+            margin: 0;
+        }
+
+        .wrapper {
+            text-align: center;
+            background-color: #fff3e6;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
         .timer-background {
-            background-color: lightgrey;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 2em;
             text-align: center;
             width: 150px;
+            margin: 0 auto;
             height: 50px;
         }
 
         .timer-running {
-            background-color: lightgreen;
+            background-color: rgba(200, 255, 200, 0.8);
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 2em;
             text-align: center;
             width: 150px;
+            margin: 0 auto;
             height: 50px;
         }
 
         .timer-paused {
-            background-color: rgb(251, 18, 47);
+            background-color: rgba(255, 100, 100, 0.8);
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 2em;
             text-align: center;
             width: 150px;
+            margin: 0 auto;
             height: 50px;
+        }
+
+        .styled-border {
+            border: 2px solid #4a4a4a;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .styled-text {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .button-style {
+            padding: 10px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000000;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
         }
     </style>
 
@@ -54,6 +98,7 @@
             var $buttonStart = $('#button-start');
             var $buttonStop = $('#button-stop');
             var $buttonReset = $('#button-reset');
+            var $timer = $("#timer");
             var interval;
             var opacityInterval;
 
@@ -61,33 +106,22 @@
             $buttonStop.addClass("button-style");
             $buttonReset.addClass("button-style");
 
-            $(".button-style").css({
-                "padding": "10px 30px",
-                "font-size": "16px",
-                "border": "none",
-                "border-radius": "5px",
-                "background-color": "#000000",
-                "color": "white",
-                "cursor": "pointer",
-                "margin": "5px"
-            });
-
-            $("#timer").addClass("timer-background");
+            $timer.addClass("timer-background styled-border styled-text");
 
             $buttonStart.click(function () {
                 clearInterval(interval);
                 clearInterval(opacityInterval);
                 interval = setInterval(startTimer, 10);
                 animateOpacity();
-                $("#timer").removeClass("timer-background timer-paused").addClass("timer-running");
+                $timer.removeClass("timer-background timer-paused").addClass("timer-running");
             });
 
             $buttonStop.click(function () {
                 clearInterval(interval);
                 clearInterval(opacityInterval);
-                $("#timer").css("opacity", "1.0");
+                $timer.css("opacity", "1.0");
                 if (seconds !== "00" || tens !== "00") {
-                    $("#timer").removeClass("timer-running timer-background").addClass("timer-paused");
+                    $timer.removeClass("timer-running timer-background").addClass("timer-paused");
                 }
             });
 
@@ -98,14 +132,14 @@
                 seconds = "00";
                 $appendTens.html(tens);
                 $appendSeconds.html(seconds);
-                $("#timer").removeClass("timer-running timer-paused").addClass("timer-background");
-                $("#timer").css("opacity", "1.0");
+                $timer.removeClass("timer-running timer-paused").addClass("timer-background");
+                $timer.css("opacity", "1.0");
             });
 
             function animateOpacity() {
-                var isFadingOut = true; // Track fading direction
+                var isFadingOut = true;
                 opacityInterval = setInterval(function () {
-                    var currentOpacity = parseFloat($("#timer").css("opacity"));
+                    var currentOpacity = parseFloat($timer.css("opacity"));
                     if (isFadingOut) {
                         currentOpacity -= 0.01;
                         if (currentOpacity <= 0.8) {
@@ -117,7 +151,7 @@
                             isFadingOut = true;
                         }
                     }
-                    $("#timer").css("opacity", currentOpacity);
+                    $timer.css("opacity", currentOpacity);
                 }, 50);
             }
 
